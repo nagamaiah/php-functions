@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 echo "<h3>PHP Strict Typing (since php7 version)</h3>";
 

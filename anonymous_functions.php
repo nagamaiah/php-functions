@@ -6,26 +6,31 @@
 // Anonymous functions should end with semicolon (;)
 
 // Closures may also inherit variables from the parent scope. Any such variables must be passed to the use language construct.
-$message = 'hello';
-$example = function () use ($message) {
-    var_dump($message);
+$message = 'Array values avg is : ';
+$example = function (array $values) use ($message): string|int {
+    $avg = array_sum($values)/count($values);
+    return $message.$avg;
 };
 
-$example();
+$data = [3,4,5.5,6,7,8];
+// echo $example($data);
 
 // Return type declaration comes after the use clause
 // $example = function () use ($message): string {
 //     return "hello $message";
 // };
 
-
 function getFullName($firstname, \Closure $callback)
 {
-    return $callback($firstname);
+    $delimiter = "-";
+    return call_user_func($callback,$firstname,$delimiter);
 }
+
+$msg = "Your fullname is : ";
 $lastName = "Raj";
-$fullName = getFullName('Pusha', function($fname) use ($lastName): string {
-        return $fname." ".$lastName;
+$fullName = getFullName('Pusha', function($fname, $deli) use ($msg, $lastName): string {
+        $args = [$msg, $fname, $deli, $lastName];
+        return implode(" ", $args);
 });
 echo $fullName;
 
